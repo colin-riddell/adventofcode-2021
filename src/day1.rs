@@ -6,9 +6,21 @@ pub fn run(){
     let lines = read_input("day1-input.txt");
     let mut count: usize =  0;
 
-    for (index, line) in lines.iter().enumerate() {
-        if index + 1 < lines.len() {
-            if lines[index + 1] > *line {
+    // part 1
+    // for (index, line) in lines.iter().enumerate() {
+    //     if index + 1 < lines.len() {
+    //         if lines[index + 1] > *line {
+    //             count += 1;
+    //         }
+    //     }
+    // }
+
+    // part 2
+    let mut lines_windowed = lines.windows(3).peekable();
+
+    while let Some(current) = lines_windowed.next() {
+        if let Some(next) = lines_windowed.peek() {
+            if next.iter().sum::<usize>() > current.iter().sum() {
                 count += 1;
             }
         }
